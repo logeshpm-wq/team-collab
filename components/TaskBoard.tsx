@@ -101,6 +101,7 @@ function Column({
 
 export default function TaskBoard() {
   const { tasks, search, openCreate } = useStore();
+  const hasTasks = tasks.length > 0;
   const [priorityFilter, setPriorityFilter] = useState<Priority | "all">("all");
   const [assigneeFilter, setAssigneeFilter] = useState<string>("all");
 
@@ -131,6 +132,30 @@ export default function TaskBoard() {
 
   const filtersActive =
     priorityFilter !== "all" || assigneeFilter !== "all" || search.length > 0;
+
+  if (!hasTasks) {
+    return (
+      <div className="max-w-2xl mx-auto text-center py-16">
+        <div className="mx-auto w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-4">
+          <ListTodo className="w-7 h-7" aria-hidden />
+        </div>
+        <h2 className="text-lg font-semibold text-slate-900 mb-1">
+          Your board is empty
+        </h2>
+        <p className="text-sm text-slate-500 mb-5">
+          Create your first task to get the team moving.
+        </p>
+        <button
+          type="button"
+          onClick={() => openCreate()}
+          className="inline-flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium px-4 py-2 rounded-lg shadow-sm"
+        >
+          <Plus className="w-4 h-4" aria-hidden />
+          Create your first task
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-7xl mx-auto">

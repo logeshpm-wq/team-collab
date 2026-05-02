@@ -90,11 +90,13 @@ A 3-hour hackathon plan for an AI-evaluated **Team Collaboration Tool** built wi
 - [ ] **YOU:** `firebase deploy` → public GCP URL
 - [ ] Add the URL to README
 
-### Step D — Polish & submit ⏳
+### Step D — Polish & submit ✅
 
-- [ ] Lighthouse a11y pass — fix any flagged issues
-- [ ] Smoke test (Jest/RTL) rendering the board
-- [ ] README: features, GCP services used, run + deploy instructions
+- [x] Skip-to-content link, `prefers-reduced-motion` support
+- [x] Live realtime indicator in header (visible Firestore connection signal)
+- [x] Empty-board CTA for first-run UX
+- [x] Smoke test (`__tests__/board.test.tsx`) + `vitest.config.ts` + `npm test` script
+- [x] Full README — features, architecture, GCP services, run + deploy instructions
 
 ---
 

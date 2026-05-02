@@ -4,17 +4,29 @@ import { Search, Plus, Bell } from "lucide-react";
 import { useStore } from "../lib/store";
 
 export default function Header() {
-  const { search, setSearch, openCreate } = useStore();
+  const { search, setSearch, openCreate, isOnline } = useStore();
 
   return (
     <header className="h-16 bg-white border-b border-slate-200 px-6 lg:px-8 flex items-center gap-4 sticky top-0 z-10">
-      <div className="min-w-0">
-        <h1 className="text-base font-semibold text-slate-900 leading-tight truncate">
-          Project Board
-        </h1>
-        <p className="text-xs text-slate-500 truncate">
-          Track tasks across your team
-        </p>
+      <div className="min-w-0 flex items-center gap-3">
+        <div className="min-w-0">
+          <h1 className="text-base font-semibold text-slate-900 leading-tight truncate">
+            Project Board
+          </h1>
+          <p className="text-xs text-slate-500 truncate">
+            Track tasks across your team
+          </p>
+        </div>
+        {isOnline && (
+          <span
+            className="hidden sm:inline-flex items-center gap-1.5 text-[11px] font-medium text-emerald-700 bg-emerald-50 ring-1 ring-emerald-200 px-2 py-0.5 rounded-full"
+            aria-label="Realtime sync active"
+            title="Realtime sync active"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" aria-hidden />
+            Live
+          </span>
+        )}
       </div>
 
       <div className="flex-1 max-w-md mx-auto hidden md:block">
