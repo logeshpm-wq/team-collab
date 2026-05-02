@@ -1,7 +1,7 @@
 "use client";
 
 import { Calendar, MoreHorizontal } from "lucide-react";
-import { useState, useRef, useEffect } from "react";
+import { memo, useState, useRef, useEffect } from "react";
 import type { Task, Status } from "../lib/mockData";
 import { memberColor, initials } from "../lib/team";
 import { useStore } from "../lib/store";
@@ -32,7 +32,7 @@ function isOverdue(iso: string, status: Task["status"]) {
   return new Date(iso) < today;
 }
 
-export default function TaskCard({ task }: { task: Task }) {
+function TaskCardImpl({ task }: { task: Task }) {
   const { moveTask, deleteTask, openEdit } = useStore();
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -166,3 +166,6 @@ export default function TaskCard({ task }: { task: Task }) {
     </article>
   );
 }
+
+const TaskCard = memo(TaskCardImpl);
+export default TaskCard;

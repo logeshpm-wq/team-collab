@@ -7,13 +7,27 @@ service cloud.firestore {
     }
 
     function isValidTask(data) {
-      return data.title is string
+      return data.keys().hasOnly(['title', 'description', 'status', 'priority', 'assignee', 'due', 'createdAt'])
+        && data.title is string
         && data.title.size() > 0
         && data.title.size() <= 200
+        && data.description is string
+        && data.description.size() <= 2000
         && data.status in ['todo', 'inprogress', 'done']
         && data.priority in ['low', 'medium', 'high']
         && data.assignee is string
-        && data.due is string;
+        && data.assignee.size() > 0
+        && data.assignee.size() <= 100
+        && data.due is string
+        && data.due.matches('^\\d{4}-\\d{2}-\\d{2}$');
+    }
+
+    function isValidActivity(data) {
+      return data.keys().hasOnly(['message', 'at'])
+        && data.message is string
+        && data.message.size() > 0
+        && data.message.size() <= 500
+        && data.at is number;
     }
 
     match /tasks/{taskId} {
@@ -25,8 +39,12 @@ service cloud.firestore {
 
     match /activity/{entryId} {
       allow read: if isSignedIn();
-      allow create: if isSignedIn();
+      allow create: if isSignedIn() && isValidActivity(request.resource.data);
       allow update, delete: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
     }
   }
 }

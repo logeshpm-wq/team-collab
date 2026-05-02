@@ -19,6 +19,7 @@ export default function Header() {
         </div>
         {isOnline && (
           <span
+            role="status"
             className="hidden sm:inline-flex items-center gap-1.5 text-[11px] font-medium text-emerald-700 bg-emerald-50 ring-1 ring-emerald-200 px-2 py-0.5 rounded-full"
             aria-label="Realtime sync active"
             title="Realtime sync active"

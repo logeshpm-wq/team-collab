@@ -18,6 +18,8 @@ export default function ActivityFeed() {
     <aside
       className="bg-white border border-slate-200 rounded-2xl p-4"
       aria-label="Recent activity"
+      aria-live="polite"
+      aria-atomic="false"
     >
       <div className="flex items-center gap-2 mb-3">
         <Activity className="w-4 h-4 text-indigo-600" aria-hidden />

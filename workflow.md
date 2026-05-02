@@ -93,10 +93,13 @@ A 3-hour hackathon plan for an AI-evaluated **Team Collaboration Tool** built wi
 ### Step D — Polish & submit ✅
 
 - [x] Skip-to-content link, `prefers-reduced-motion` support
-- [x] Live realtime indicator in header (visible Firestore connection signal)
+- [x] Live realtime indicator in header (Firestore connection signal, `role="status"`)
 - [x] Empty-board CTA for first-run UX
-- [x] Smoke test (`__tests__/board.test.tsx`) + `vitest.config.ts` + `npm test` script
+- [x] Two test files (board render + team helpers) + `vitest.config.ts` + `npm test`
 - [x] Full README — features, architecture, GCP services, run + deploy instructions
+- [x] Hardened `firestore.rules`: `keys().hasOnly()`, length caps, ISO date regex, default-deny catch-all
+- [x] `aria-live="polite"` on activity feed for screen-reader announcements
+- [x] `React.memo` on `TaskCard` to skip re-renders when its task prop is unchanged
 
 ---
 
